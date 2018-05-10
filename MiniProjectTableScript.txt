@@ -1,0 +1,47 @@
+CREATE TABLE Asset(
+AssetId Number Primary key,
+AssetName Varchar2(25),
+AssetDes Varchar2(25),
+Quantity Number
+);
+
+Create Table User_Master(
+UserId Varchar2(6) primary key,
+UserName Varchar(15),
+UserPassword Varchar2(50),
+UserType Varchar2(10)
+);
+
+Create Table Department(
+Dept_ID int primary key,
+Dept_Name Varchar2(50)
+);
+
+Create Table Employee(
+Empno Number(6) Primary key,
+Ename Varchar2(25),
+job Varchar2(50),
+mgr number(4),
+hiredate date,
+Dept_ID number references Department(Dept_ID) 
+);
+
+Create Table Asset_Allocation(
+AllocationId Number primary key,
+AssetId Number references Asset(AssetId),
+Empno Number references Employee(Empno),
+Allocation_date Date,
+Release_date Date,
+Status Varchar2(15)
+);
+
+INSERT INTO User_Master VALUES ('EMP101','admin','admin123','admin');
+INSERT INTO User_Master VALUES ('EMP102','manager','manager123','manager');
+
+INSERT INTO Department VALUES (301,'Java');
+
+Create sequence assetseq
+start with 1
+increment by 1;
+
+INSERT INTO Employee VALUES (assetseq.nextval,'Saumya','Analyst','99','18-DEC-2017',301);
